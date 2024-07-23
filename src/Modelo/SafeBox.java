@@ -6,6 +6,7 @@ package Modelo;
 
 import Modelo.excepciones.EXEntradaRepetida;
 import java.io.Serializable;
+import java.util.Iterator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -87,5 +88,19 @@ public class SafeBox implements Serializable {
                
         return masterpassword.equals(introducedps);
     
+    }
+    
+    public Iterator<Entrada> getIterator(){
+    
+        return this.entradas.iterator();
+    
+    }
+    
+    public void prueba(){
+    
+        Iterator<Entrada> itr = getIterator();
+        while (itr.hasNext()) {
+                   System.out.println(itr.next().toString());
+        }
     }
 }

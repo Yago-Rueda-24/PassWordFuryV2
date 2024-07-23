@@ -50,9 +50,9 @@
       <MenuBar fx:id="menubar" prefHeight="25.0" prefWidth="637.0" styleClass="menu" stylesheets="@mainwindow.css">
         <menus>
           <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
+               <items>
+                  <MenuItem fx:id="a" mnemonicParsing="false" onAction="#hloi" text="hola" />
+               </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
@@ -61,7 +61,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="sad" mnemonicParsing="false" onAction="#asdasd" text="About" />
             </items>
           </Menu>
         </menus>

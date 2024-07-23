@@ -7,24 +7,33 @@ package Controlador;
 import Modelo.excepciones.ExEntradaInvalida;
 import Modelo.excepciones.EXEntradaRepetida;
 import Modelo.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -37,7 +46,7 @@ public class MainWindowController implements Initializable {
     private Alert alert;
     private ArrayList entryElements;
     private Generador generator;
-
+    private SafeBox sf;
     @FXML
     private Button Banadir;
     @FXML
@@ -72,6 +81,10 @@ public class MainWindowController implements Initializable {
     private Button BCancelar;
     @FXML
     private Button BGenerar;
+    @FXML
+    private MenuItem a;
+    @FXML
+    private MenuItem sad;
 
     /**
      * Initializes the controller class.
@@ -81,8 +94,16 @@ public class MainWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            //Crea una nueva safebox(Esto es de prueba)
+            this.sf = new SafeBox("a", "a");
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Asigna el array de entradas al array de entradas de la safebox
+        this.entradas = sf.getEntradas();
         //Guarda las entradas que se mostraran en la tabla de la aplicación
-        this.entradas = FXCollections.observableArrayList();
+        FXCollections.observableArrayList();
         //Se crea la alerta que se usara en la ejecución del programa,siempre sera lo misma lo que se cambiara es su contenido
         this.alert = new Alert(Alert.AlertType.ERROR);
         //Se crean y guardan los campos que se usan para añadir una nueva entrada
@@ -103,6 +124,7 @@ public class MainWindowController implements Initializable {
         TPassword.setPromptText("Introduce contraseña");
         //Instancia el generador de contraseñas
         generator = Generador.getInstance();
+
         //Oculta todos los elementos de entrada de datos
         showEntry(false);
     }
@@ -123,6 +145,7 @@ public class MainWindowController implements Initializable {
     private void add(ActionEvent event) {
 
         showEntry(true);
+       
 
     }
 
@@ -189,5 +212,33 @@ public class MainWindowController implements Initializable {
     @FXML
     private void generar(ActionEvent event) {
         this.TPassword.setText(generator.generate());
+    }
+
+    @FXML
+    private void hloi(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/secondWindow.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador de la segunda ventana
+            SecondWindowController controller = loader.getController();
+
+            // Configurar la segunda ventana
+            Stage stage = new Stage();
+            stage.setTitle("Second Window");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void asdasd(ActionEvent event) {
+        
+         this.sf.prueba();
     }
 }
