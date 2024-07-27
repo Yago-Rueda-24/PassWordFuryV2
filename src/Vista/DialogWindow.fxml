@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="288.0" prefWidth="500.0" style="-fx-background-color: rgb(38,38,38);" styleClass="fondo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controlador.DialogWindowController">
+    <stylesheets>
+        <URL value="@/Vista/estilos/dialogwindow.css" />
+    </stylesheets>
+   <children>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="600.0" styleClass="cabecera" stylesheets="@dialogwindow.css">
+         <children>
+            <Label id="titulo" fx:id="TTitulo" layoutX="14.0" layoutY="14.0" styleClass="texto" text="Label" />
+         </children>
+      </Pane>
+      <Label id="desc" fx:id="TDescripcion" layoutX="14.0" layoutY="121.0" styleClass="texto" stylesheets="@dialogwindow.css" text="Label" textFill="WHITE" />
+      <Button fx:id="BCerrar" layoutX="8.0" layoutY="253.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="27.0" prefWidth="585.0" styleClass="boton" stylesheets="@dialogwindow.css" text="Aceptar" />
+   </children>
+</AnchorPane>

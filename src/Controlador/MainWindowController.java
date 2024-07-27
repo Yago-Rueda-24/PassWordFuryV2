@@ -102,10 +102,6 @@ public class MainWindowController implements Initializable {
         }
         //Asigna el array de entradas al array de entradas de la safebox
         this.entradas = sf.getEntradas();
-        //Guarda las entradas que se mostraran en la tabla de la aplicación
-        FXCollections.observableArrayList();
-        //Se crea la alerta que se usara en la ejecución del programa,siempre sera lo misma lo que se cambiara es su contenido
-        this.alert = new Alert(Alert.AlertType.ERROR);
         //Se crean y guardan los campos que se usan para añadir una nueva entrada
         this.entryElements = new ArrayList();
         this.entryElements.add(Lapp);
@@ -145,7 +141,6 @@ public class MainWindowController implements Initializable {
     private void add(ActionEvent event) {
 
         showEntry(true);
-       
 
     }
 
@@ -160,11 +155,32 @@ public class MainWindowController implements Initializable {
      * @param title Titulo que llevara la alerta
      * @param Description Descripcion del mensaje/Error que llevara la alerta
      */
-    private void showAlert(String title, String Description) {
-        this.alert.setTitle(title);
-        this.alert.setContentText(Description);
-        this.alert.showAndWait();
+    private void showAlert(String title, String description) {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/DialogWindow.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador de la segunda ventana
+            DialogWindowController controller = loader.getController();
+            controller.iniciar(title, description);
+
+            // Configurar la segunda ventana
+            Stage stage = new Stage();
+            stage.setTitle("Error");
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+       
     }
+   
 
     /**
      *
@@ -238,7 +254,7 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void asdasd(ActionEvent event) {
-        
-         this.sf.prueba();
+
+        this.sf.prueba();
     }
 }
