@@ -1,0 +1,37 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: rgb(36,36,36);
+
+}
+.deco{
+    -fx-background-color: rgb(156,108,240);
+}
+.etiqueta{
+
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+.descripcion{
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+#titulo{
+    -fx-font-size: 27px;
+}
+
+.boton{
+    -fx-background-color: rgb(156,108,240);
+    -fx-border-color: white;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    
+
+}
+
+.boton:hover{
+    -fx-cursor: hand;
+}

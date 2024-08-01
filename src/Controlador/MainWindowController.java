@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -178,9 +177,7 @@ public class MainWindowController implements Initializable {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       
     }
-   
 
     /**
      *
@@ -254,7 +251,7 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void asdasd(ActionEvent event) {
-
-        this.sf.prueba();
+        Stage stage = (Stage) this.BGuardar.getScene().getWindow();
+        stage.close();
     }
 }

@@ -23,7 +23,7 @@ public class Main extends Application {
         try {
             //Cargo la vista
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("/Vista/mainWindow.fxml"));
+            loader.setLocation(Main.class.getResource("/Vista/welcomeWindow.fxml"));
 
             // Cargo la ventana
             Pane ventana = (Pane) loader.load();
