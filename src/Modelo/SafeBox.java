@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import Modelo.excepciones.*;
 
 /**
  *
@@ -19,10 +20,10 @@ public class SafeBox implements Serializable {
     private String masterpassword;
     private ObservableList<Entrada> entradas;
 
-    public SafeBox(String password, String repeatpassword) throws Exception {
+    public SafeBox(String password, String repeatpassword) throws EXErrorCreacion {
         
         if(!password.equals(repeatpassword)){
-            throw new Exception("Las contraseñas no son iguales");
+            throw new EXErrorCreacion("Las contraseñas no son iguales");
         }
         this.masterpassword = password;
         this.entradas = FXCollections.observableArrayList();
