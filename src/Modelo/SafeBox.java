@@ -7,9 +7,9 @@ package Modelo;
 import Modelo.excepciones.EXEntradaRepetida;
 import java.io.Serializable;
 import java.util.Iterator;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import Modelo.excepciones.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,15 +18,15 @@ import Modelo.excepciones.*;
 public class SafeBox implements Serializable {
 
     private String masterpassword;
-    private ObservableList<Entrada> entradas;
+    private ArrayList<Entrada> entradas;
 
     public SafeBox(String password, String repeatpassword) throws EXErrorCreacion {
-        
-        if(!password.equals(repeatpassword)){
-            throw new EXErrorCreacion("Las contraseñas no son iguales");
+
+        if (!password.equals(repeatpassword)) {
+            throw new EXErrorCreacion("Las contraseñas no son iguales, imposible crear la boveda");
         }
         this.masterpassword = password;
-        this.entradas = FXCollections.observableArrayList();
+        this.entradas = new ArrayList<>();
     }
 
     public String getPassword() {
@@ -37,11 +37,11 @@ public class SafeBox implements Serializable {
         this.masterpassword = password;
     }
 
-    public ObservableList<Entrada> getEntradas() {
+    public ArrayList<Entrada> getEntradas() {
         return entradas;
     }
 
-    public void setEntradas(ObservableList<Entrada> entradas) {
+    public void setEntradas(ArrayList<Entrada> entradas) {
         this.entradas = entradas;
     }
 
@@ -75,33 +75,34 @@ public class SafeBox implements Serializable {
 
     /**
      * Modifica una entrada existente en la boveda
+     *
      * @param entryremoved La entrada que se va a ser modificada
      * @param entryadded La entrada efectiva despues de la modificación
-     * @throws EXEntradaRepetida 
+     * @throws EXEntradaRepetida
      */
     public void modify(Entrada entryremoved, Entrada entryadded) throws EXEntradaRepetida {
         this.add(entryadded);
         this.remove(entryremoved);
 
     }
-    
-    public boolean unlock(String introducedps){
-               
+
+    public boolean unlock(String introducedps) {
+
         return masterpassword.equals(introducedps);
-    
+
     }
-    
-    public Iterator<Entrada> getIterator(){
-    
+
+    public Iterator<Entrada> getIterator() {
+
         return this.entradas.iterator();
-    
+
     }
-    
-    public void prueba(){
-    
+
+    public void prueba() {
+
         Iterator<Entrada> itr = getIterator();
         while (itr.hasNext()) {
-                   System.out.println(itr.next().toString());
+            System.out.println(itr.next().toString());
         }
     }
 }

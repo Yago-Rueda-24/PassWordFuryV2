@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="610.0" style="-fx-background-color: rgb(36,36,36);" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.CreateWindowController">
+    <stylesheets>
+        <URL value="@/Vista/estilos/createwindow.css" />
+    </stylesheets>
+   <children>
+      <Pane layoutX="-6.0" layoutY="-7.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="81.0" prefWidth="639.0" styleClass="pane" stylesheets="@estilos/createwindow.css">
+         <children>
+            <Label layoutX="24.0" layoutY="21.0" styleClass="titulo" stylesheets="@estilos/createwindow.css" text="Nueva Boveda">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Label layoutX="14.0" layoutY="95.0" styleClass="texto" stylesheets="@estilos/createwindow.css" text="Introduce la contraseña de tu boveda" />
+      <Label layoutX="15.0" layoutY="190.0" styleClass="texto" stylesheets="@estilos/createwindow.css" text="Repite la contraseña" />
+      <TextField fx:id="TPassword" layoutX="14.0" layoutY="135.0" prefHeight="25.0" prefWidth="396.0" styleClass="entry" stylesheets="@estilos/createwindow.css" />
+      <TextField fx:id="TRepetir" layoutX="14.0" layoutY="220.0" prefHeight="25.0" prefWidth="396.0" styleClass="entry" stylesheets="@estilos/createwindow.css" />
+      <Label layoutX="14.0" layoutY="265.0" styleClass="texto" stylesheets="@estilos/createwindow.css" text="Introduce la ubicación de tu boveda" />
+      <TextField fx:id="Tubicacion" editable="false" layoutX="14.0" layoutY="305.0" prefHeight="25.0" prefWidth="396.0" styleClass="entry" stylesheets="@estilos/createwindow.css" />
+      <Button fx:id="BUbicacion" layoutX="15.0" layoutY="366.0" mnemonicParsing="false" onAction="#selectUbi" styleClass="boton" stylesheets="@estilos/createwindow.css" text="Seleccionar Ubicacion" />
+      <Button fx:id="BCrear" layoutX="445.0" layoutY="366.0" mnemonicParsing="false" onAction="#createSafeBox" prefHeight="27.0" prefWidth="134.0" styleClass="boton" stylesheets="@estilos/createwindow.css" text="Crear" />
+   </children>
+</AnchorPane>

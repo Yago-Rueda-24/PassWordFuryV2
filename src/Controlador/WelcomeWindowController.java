@@ -50,6 +50,7 @@ public class WelcomeWindowController implements Initializable {
 
     @FXML
     private void crear(ActionEvent event) {
+        cargarYAbrir("/Vista/createWindow.fxml", "crear");
 
     }
 

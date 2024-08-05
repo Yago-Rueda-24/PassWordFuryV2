@@ -7,12 +7,19 @@ package Controlador;
 import Modelo.excepciones.ExEntradaInvalida;
 import Modelo.excepciones.EXEntradaRepetida;
 import Modelo.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,6 +38,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -41,11 +49,18 @@ import javafx.stage.Stage;
  */
 public class MainWindowController implements Initializable {
 
-    private ObservableList entradas;
+    private String ruta;
+    private ObservableList entradasTabla;
+    private ArrayList<Entrada> entradasBoveda;
+    private ObjectOutputStream out;
     private Alert alert;
+    /**
+     * Se usa para el frontend de la aplicación no tiene ningun uso más
+     */
     private ArrayList entryElements;
     private Generador generator;
     private SafeBox sf;
+
     @FXML
     private Button Banadir;
     @FXML
@@ -93,14 +108,7 @@ public class MainWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            //Crea una nueva safebox(Esto es de prueba)
-            this.sf = new SafeBox("a", "a");
-        } catch (Exception ex) {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //Asigna el array de entradas al array de entradas de la safebox
-        this.entradas = sf.getEntradas();
+        this.entradasTabla = FXCollections.observableArrayList();
         //Se crean y guardan los campos que se usan para añadir una nueva entrada
         this.entryElements = new ArrayList();
         this.entryElements.add(Lapp);
@@ -128,8 +136,10 @@ public class MainWindowController implements Initializable {
     private void delete(ActionEvent event) {
         Entrada delete = (Entrada) tabla.getSelectionModel().getSelectedItem();
         if (delete != null) {
-            this.entradas.remove(delete);
-            this.tabla.refresh();
+            this.entradasBoveda.remove(delete);
+            this.entradasTabla.remove(delete);
+            storeData();
+            this.tabla.setItems(entradasTabla);
         } else {
             showAlert("Error", "El campo seleccionado esta vacio");
         }
@@ -158,7 +168,7 @@ public class MainWindowController implements Initializable {
 
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/DialogWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/dialogWindow.fxml"));
             Parent root = loader.load();
 
             // Obtener el controlador de la segunda ventana
@@ -200,15 +210,19 @@ public class MainWindowController implements Initializable {
             if (TApp.getText().equals("") || TUser.getText().equals("") || TPassword.getText().equals("")) {
                 throw new ExEntradaInvalida("La entrada que quieres añadir no tiene todos los campos completos");
             }
-            for (Object e : entradas) {
-                Entrada aux = (Entrada) e;
-                if (aux.getApp().equals(this.TApp.getText())) {
-                    throw new EXEntradaRepetida("La entrada que quieres añadir ya se encuentra en la boveda");
+            if (!entradasTabla.isEmpty()) {
+                for (Object e : entradasTabla) {
+                    Entrada aux = (Entrada) e;
+                    if (aux.getApp().equals(this.TApp.getText())) {
+                        throw new EXEntradaRepetida("La entrada que quieres añadir ya se encuentra en la boveda");
+                    }
                 }
             }
             Entrada aux = new Entrada(TApp.getText(), TUser.getText(), TPassword.getText());
-            this.entradas.add(aux);
-            this.tabla.setItems(entradas);
+            this.entradasBoveda.add(aux);
+            this.entradasTabla.add(aux);
+            storeData();
+            this.tabla.setItems(entradasTabla);
 
         } catch (ExEntradaInvalida | EXEntradaRepetida ex) {
             showAlert("Error", ex.getLocalizedMessage());
@@ -229,29 +243,60 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void hloi(ActionEvent event) {
+        ObjectInputStream in = null;
         try {
+            FileChooser filec = new FileChooser();
+            File filein = filec.showOpenDialog(null);
+            in = new ObjectInputStream(new FileInputStream(filein.getAbsolutePath()));
+            Object aux = in.readObject();
+            this.sf = (SafeBox) aux;
+            this.entradasBoveda = sf.getEntradas();
+            this.ruta = filein.getAbsolutePath();
+            for (Entrada e : entradasBoveda) {
+                this.entradasTabla.add(e);
+            }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/secondWindow.fxml"));
-            Parent root = loader.load();
+            this.tabla.setItems(entradasTabla);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
-            // Obtener el controlador de la segunda ventana
-            SecondWindowController controller = loader.getController();
+    @FXML
+    private void asdasd(ActionEvent event) {
+        System.out.println(this.ruta);
+    }
 
-            // Configurar la segunda ventana
-            Stage stage = new Stage();
-            stage.setTitle("Second Window");
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
+    /**
+     * Establece la safebox y la ruta de esta para que el controlador pueda
+     * trabajar con los recursos
+     *
+     * @param sf La safebox que se carga
+     * @param ruta La ruta en la que se almacena la safebox que se cargara
+     */
+    public void setSafeBox(SafeBox sf, String ruta) {
+        this.sf = sf;
+        entradasBoveda = sf.getEntradas();
+        this.ruta = ruta;
 
+    }
+
+    public void storeData() {
+        try {
+            out= new ObjectOutputStream(new FileOutputStream(ruta));
+            out.writeObject(sf);
+            out.close();
+            out = null;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    @FXML
-    private void asdasd(ActionEvent event) {
-        Stage stage = (Stage) this.BGuardar.getScene().getWindow();
-        stage.close();
-    }
 }
