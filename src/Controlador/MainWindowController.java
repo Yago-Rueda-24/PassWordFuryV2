@@ -241,34 +241,9 @@ public class MainWindowController implements Initializable {
         this.TPassword.setText(generator.generate());
     }
 
-    @FXML
-    private void hloi(ActionEvent event) {
-        ObjectInputStream in = null;
-        try {
-            FileChooser filec = new FileChooser();
-            File filein = filec.showOpenDialog(null);
-            in = new ObjectInputStream(new FileInputStream(filein.getAbsolutePath()));
-            Object aux = in.readObject();
-            this.sf = (SafeBox) aux;
-            this.entradasBoveda = sf.getEntradas();
-            this.ruta = filein.getAbsolutePath();
-            for (Entrada e : entradasBoveda) {
-                this.entradasTabla.add(e);
-            }
-            this.tabla.setItems(entradasTabla);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
 
-    @FXML
-    private void asdasd(ActionEvent event) {
-        System.out.println(this.ruta);
-    }
+   
 
     /**
      * Establece la safebox y la ruta de esta para que el controlador pueda
