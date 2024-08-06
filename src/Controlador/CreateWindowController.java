@@ -36,7 +36,6 @@ public class CreateWindowController implements Initializable {
 
     private SafeBox sf;
     private String ruta;
-    
 
     @FXML
     private TextField TPassword;
@@ -48,6 +47,8 @@ public class CreateWindowController implements Initializable {
     private Button BUbicacion;
     @FXML
     private Button BCrear;
+    @FXML
+    private Button Bcancelar;
 
     /**
      * Initializes the controller class.
@@ -158,6 +159,34 @@ public class CreateWindowController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+   
+
+    @FXML
+    private void closeWindow(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/welcomeWindow.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador de la segunda ventana
+            WelcomeWindowController cont = loader.getController();
+
+            // Configurar la segunda ventana
+            Stage stage = new Stage();
+            stage.setTitle("Bienvenida");
+            stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            Stage stageclose = (Stage) this.BCrear.getScene().getWindow();
+            stageclose.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

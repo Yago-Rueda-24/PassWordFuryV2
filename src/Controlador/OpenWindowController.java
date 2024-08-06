@@ -125,6 +125,30 @@ public class OpenWindowController implements Initializable {
 
     @FXML
     private void closeWindow(ActionEvent event) {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/welcomeWindow.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador de la segunda ventana
+            WelcomeWindowController cont =loader.getController();
+
+            // Configurar la segunda ventana
+            Stage stage = new Stage();
+            stage.setTitle("Bienvenida");
+            stage.setResizable(false);
+            stage.setScene(new Scene(root));
+            stage.show();
+            
+            Stage stageclose = (Stage) this.BAbrir.getScene().getWindow();
+            stageclose.close();
+           
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     private void showAlert(String title, String description) {

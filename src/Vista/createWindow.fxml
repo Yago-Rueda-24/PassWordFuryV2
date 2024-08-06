@@ -27,7 +27,8 @@
       <TextField fx:id="TRepetir" layoutX="14.0" layoutY="220.0" prefHeight="25.0" prefWidth="396.0" styleClass="entry" stylesheets="@estilos/createwindow.css" />
       <Label layoutX="14.0" layoutY="265.0" styleClass="texto" stylesheets="@estilos/createwindow.css" text="Introduce la ubicación de tu boveda" />
       <TextField fx:id="Tubicacion" editable="false" layoutX="14.0" layoutY="305.0" prefHeight="25.0" prefWidth="396.0" styleClass="entry" stylesheets="@estilos/createwindow.css" />
-      <Button fx:id="BUbicacion" layoutX="15.0" layoutY="366.0" mnemonicParsing="false" onAction="#selectUbi" styleClass="boton" stylesheets="@estilos/createwindow.css" text="Seleccionar Ubicacion" />
+      <Button fx:id="BUbicacion" layoutX="445.0" layoutY="304.0" mnemonicParsing="false" onAction="#selectUbi" styleClass="boton" stylesheets="@estilos/createwindow.css" text="Seleccionar Ubicacion" />
       <Button fx:id="BCrear" layoutX="445.0" layoutY="366.0" mnemonicParsing="false" onAction="#createSafeBox" prefHeight="27.0" prefWidth="134.0" styleClass="boton" stylesheets="@estilos/createwindow.css" text="Crear" />
+      <Button fx:id="Bcancelar" layoutX="16.0" layoutY="366.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="27.0" prefWidth="134.0" styleClass="boton" stylesheets="@estilos/createwindow.css" text="Cancelar" />
    </children>
 </AnchorPane>
