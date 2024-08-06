@@ -44,7 +44,7 @@ public class WelcomeWindowController implements Initializable {
 
     @FXML
     private void abrir(ActionEvent event) {
-        cargarYAbrir("/Vista/mainWindow.fxml", "abrir");
+        cargarYAbrir("/Vista/openWindow.fxml", "abrir");
 
     }
 

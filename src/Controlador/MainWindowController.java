@@ -255,7 +255,6 @@ public class MainWindowController implements Initializable {
             for (Entrada e : entradasBoveda) {
                 this.entradasTabla.add(e);
             }
-
             this.tabla.setItems(entradasTabla);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
@@ -280,14 +279,20 @@ public class MainWindowController implements Initializable {
      */
     public void setSafeBox(SafeBox sf, String ruta) {
         this.sf = sf;
-        entradasBoveda = sf.getEntradas();
+        this.entradasBoveda = sf.getEntradas();
         this.ruta = ruta;
+        if (!this.entradasBoveda.isEmpty()) {
+            for (Entrada e : entradasBoveda) {
+                this.entradasTabla.add(e);
+            }
+            this.tabla.setItems(entradasTabla);
+        }
 
     }
 
     public void storeData() {
         try {
-            out= new ObjectOutputStream(new FileOutputStream(ruta));
+            out = new ObjectOutputStream(new FileOutputStream(ruta));
             out.writeObject(sf);
             out.close();
             out = null;

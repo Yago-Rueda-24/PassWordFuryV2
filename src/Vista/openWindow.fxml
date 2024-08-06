@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(36,36,36);" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controlador.OpenWindowController">
+    <stylesheets>
+        <URL value="@/Vista/estilos/openwindow.css" />
+    </stylesheets>
+   <children>
+      <Pane prefHeight="78.0" prefWidth="623.0" styleClass="pane" stylesheets="@estilos/openwindow.css">
+         <children>
+            <Label id="titulo" layoutX="14.0" layoutY="14.0" styleClass="etiqueta" stylesheets="@estilos/openwindow.css" text="Abrir boveda" />
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="119.0" styleClass="etiqueta" stylesheets="@estilos/openwindow.css" text="Ubicacion de la boveda" />
+      <TextField fx:id="Tubi" editable="false" layoutX="14.0" layoutY="146.0" prefHeight="25.0" prefWidth="466.0" styleClass="entradatexto" stylesheets="@estilos/openwindow.css" />
+      <Button fx:id="BUbi" layoutX="14.0" layoutY="188.0" mnemonicParsing="false" onAction="#selectUbi" prefHeight="27.0" prefWidth="154.0" styleClass="boton" stylesheets="@estilos/openwindow.css" text="Seleccionar Ubicacion" />
+      <Button fx:id="BAbrir" layoutX="456.0" layoutY="361.0" mnemonicParsing="false" onAction="#OpenSafe" prefHeight="25.0" prefWidth="123.0" styleClass="boton" stylesheets="@estilos/openwindow.css" text="Abrir" />
+      <TextField fx:id="Tpassword" layoutX="14.0" layoutY="287.0" prefHeight="25.0" prefWidth="466.0" styleClass="entradatexto" stylesheets="@estilos/openwindow.css" />
+      <Label layoutX="14.0" layoutY="260.0" styleClass="etiqueta" stylesheets="@estilos/openwindow.css" text="Contraseña de la boveda" />
+      <Button fx:id="BCancelar" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="123.0" styleClass="boton" stylesheets="@estilos/openwindow.css" text="Cancelar" />
+   </children>
+</AnchorPane>

@@ -86,9 +86,9 @@ public class SafeBox implements Serializable {
 
     }
 
-    public boolean unlock(String introducedps) {
+    public boolean unlock(String password) {
 
-        return masterpassword.equals(introducedps);
+        return masterpassword.equals(password);
 
     }
 
