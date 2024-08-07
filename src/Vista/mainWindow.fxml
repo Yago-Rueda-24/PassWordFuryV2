@@ -51,7 +51,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem mnemonicParsing="false" text="hola" />
+                  <MenuItem fx:id="MBCerrar" mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar" />
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

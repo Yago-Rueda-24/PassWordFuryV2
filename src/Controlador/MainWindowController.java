@@ -96,9 +96,7 @@ public class MainWindowController implements Initializable {
     @FXML
     private Button BGenerar;
     @FXML
-    private MenuItem a;
-    @FXML
-    private MenuItem sad;
+    private MenuItem MBCerrar;
 
     /**
      * Initializes the controller class.
@@ -277,6 +275,13 @@ public class MainWindowController implements Initializable {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @FXML
+    private void cerrarSesion(ActionEvent event) {
+        this.sf = null;
+        this.ruta = null;
+        System.exit(0);
     }
 
 }
