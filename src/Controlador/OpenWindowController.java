@@ -15,6 +15,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -36,6 +39,7 @@ public class OpenWindowController implements Initializable {
 
     private String ruta;
     private SafeBox sf;
+    private StringProperty strproperty;
     @FXML
     private TextField Tubi;
     @FXML
@@ -46,6 +50,10 @@ public class OpenWindowController implements Initializable {
     private TextField Tpassword;
     @FXML
     private Button BCancelar;
+    @FXML
+    private Button BMostrar;
+    @FXML
+    private PasswordField TOcultPassword;
 
     /**
      * Initializes the controller class.
@@ -54,6 +62,10 @@ public class OpenWindowController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Tubi.setPromptText("Elija la ubicación de la boveda usando el boton");
         Tpassword.setPromptText("Inserte la contraseña de la safebox");
+        Tpassword.setVisible(false);
+        strproperty = new SimpleStringProperty();
+        Tpassword.textProperty().bindBidirectional(strproperty);
+        TOcultPassword.textProperty().bindBidirectional(strproperty);
     }
 
     @FXML
@@ -132,7 +144,7 @@ public class OpenWindowController implements Initializable {
             Parent root = loader.load();
 
             // Obtener el controlador de la segunda ventana
-            WelcomeWindowController cont =loader.getController();
+            WelcomeWindowController cont = loader.getController();
 
             // Configurar la segunda ventana
             Stage stage = new Stage();
@@ -140,10 +152,9 @@ public class OpenWindowController implements Initializable {
             stage.setResizable(false);
             stage.setScene(new Scene(root));
             stage.show();
-            
+
             Stage stageclose = (Stage) this.BAbrir.getScene().getWindow();
             stageclose.close();
-           
 
         } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
@@ -172,6 +183,21 @@ public class OpenWindowController implements Initializable {
 
         } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void mostrarPassWord(ActionEvent event) {
+        if (this.BMostrar.getText().equals("Ocultar")) {
+            this.BMostrar.setText("Mostrar");
+            this.Tpassword.setVisible(false);
+            this.TOcultPassword.setVisible(true);
+
+        } else {
+            this.BMostrar.setText("Ocultar");
+            this.Tpassword.setVisible(true);
+            this.TOcultPassword.setVisible(false);
         }
 
     }

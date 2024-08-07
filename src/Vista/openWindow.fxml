@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(36,36,36);" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controlador.OpenWindowController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: rgb(36,36,36);" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.OpenWindowController">
     <stylesheets>
         <URL value="@/Vista/estilos/openwindow.css" />
     </stylesheets>
@@ -24,5 +24,7 @@
       <TextField fx:id="Tpassword" layoutX="14.0" layoutY="287.0" prefHeight="25.0" prefWidth="466.0" styleClass="entradatexto" stylesheets="@estilos/openwindow.css" />
       <Label layoutX="14.0" layoutY="260.0" styleClass="etiqueta" stylesheets="@estilos/openwindow.css" text="Contraseña de la boveda" />
       <Button fx:id="BCancelar" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="123.0" styleClass="boton" stylesheets="@estilos/openwindow.css" text="Cancelar" />
+      <Button fx:id="BMostrar" layoutX="489.0" layoutY="286.0" mnemonicParsing="false" onAction="#mostrarPassWord" prefHeight="27.0" prefWidth="104.0" styleClass="boton" stylesheets="@estilos/openwindow.css" text="Mostrar" />
+      <PasswordField fx:id="TOcultPassword" layoutX="14.0" layoutY="287.0" prefHeight="25.0" prefWidth="466.0" styleClass="entradatexto" stylesheets="@estilos/openwindow.css" />
    </children>
 </AnchorPane>
