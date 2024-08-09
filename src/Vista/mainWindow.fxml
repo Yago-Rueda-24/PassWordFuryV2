@@ -40,8 +40,8 @@
             </Pane>
             <Pane layoutX="28.0" layoutY="19.0" prefHeight="144.0" prefWidth="200.0" styleClass="PaneEntry">
                <children>
-                  <TextField fx:id="TBuscar" layoutX="18.0" layoutY="89.0" onKeyReleased="#buscar" prefHeight="25.0" prefWidth="164.0" promptText="Buscar con nombre exacto" styleClass="TxtEntry" />
-                  <ComboBox fx:id="ComboOpciones" layoutX="18.0" layoutY="47.0" prefHeight="25.0" prefWidth="164.0" styleClass="combobox" />
+                  <TextField fx:id="TBuscar" layoutX="18.0" layoutY="89.0" onAction="#buscar" onKeyReleased="#buscar" prefHeight="25.0" prefWidth="164.0" promptText="Buscar con nombre exacto" styleClass="TxtEntry" />
+                  <ComboBox fx:id="ComboOpciones" layoutX="18.0" layoutY="47.0" onAction="#buscarTexto" prefHeight="25.0" prefWidth="164.0" styleClass="combobox" />
                   <Label layoutX="18.0" layoutY="14.0" style="-fx-text-fill: white;" text="Buscar Información" />
                </children></Pane>
          </children></Pane>

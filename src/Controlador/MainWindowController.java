@@ -7,12 +7,9 @@ package Controlador;
 import Modelo.excepciones.ExEntradaInvalida;
 import Modelo.excepciones.EXEntradaRepetida;
 import Modelo.*;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,7 +37,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -296,7 +292,7 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    private void buscar(KeyEvent event) {
+    private void buscar() {
         if (TBuscar.getText().equals("")) {
             entradasTabla.removeAll(entradasBoveda);
             for (Entrada e : entradasBoveda) {
@@ -342,7 +338,55 @@ public class MainWindowController implements Initializable {
             }
 
         }
+    }
 
+    @FXML
+    private void buscarTexto(ActionEvent event) {
+        if (TBuscar.getText().equals("")) {
+            entradasTabla.removeAll(entradasBoveda);
+            for (Entrada e : entradasBoveda) {
+                this.entradasTabla.add(e);
+            }
+            this.tabla.setItems(entradasTabla);
+        } else {
+
+            switch (ComboOpciones.getValue()) {
+                case "app":
+                    entradasTabla.removeAll(entradasBoveda);
+                    for (Entrada e : entradasBoveda) {
+                        if (e.getApp().contains(TBuscar.getText())) {
+                            this.entradasTabla.add(e);
+                        }
+                    }
+                    this.tabla.setItems(entradasTabla);
+
+                    break;
+                case "usuario":
+                    entradasTabla.removeAll(entradasBoveda);
+                    for (Entrada e : entradasBoveda) {
+                        if (e.getUser().contains(TBuscar.getText())) {
+                            this.entradasTabla.add(e);
+                        }
+                    }
+                    this.tabla.setItems(entradasTabla);
+
+                    break;
+                case "password":
+                    entradasTabla.removeAll(entradasBoveda);
+                    for (Entrada e : entradasBoveda) {
+                        if (e.getPassword().contains(TBuscar.getText())) {
+                            this.entradasTabla.add(e);
+                        }
+                    }
+                    this.tabla.setItems(entradasTabla);
+
+                    break;
+                default:
+                    System.err.println("Error en el switch , en ningun caso se deberia activar esta opcion");
+
+            }
+
+        }
     }
 
 }
