@@ -29,6 +29,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -36,6 +37,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -60,6 +62,10 @@ public class MainWindowController implements Initializable {
     private ArrayList entryElements;
     private Generador generator;
     private SafeBox sf;
+    /**
+     * Se usa para señalar las opciones que tiene el combobox
+     */
+    private ObservableList opcombobox;
 
     @FXML
     private Button Banadir;
@@ -97,6 +103,10 @@ public class MainWindowController implements Initializable {
     private Button BGenerar;
     @FXML
     private MenuItem MBCerrar;
+    @FXML
+    private TextField TBuscar;
+    @FXML
+    private ComboBox<String> ComboOpciones;
 
     /**
      * Initializes the controller class.
@@ -125,9 +135,14 @@ public class MainWindowController implements Initializable {
         TPassword.setPromptText("Introduce contraseña");
         //Instancia el generador de contraseñas
         generator = Generador.getInstance();
-
         //Oculta todos los elementos de entrada de datos
+        //Inicialización del combobox
+        opcombobox = FXCollections.observableArrayList("app", "usuario", "password");
+        ComboOpciones.setItems(opcombobox);
+        ComboOpciones.setValue("app");
+
         showEntry(false);
+
     }
 
     @FXML
@@ -239,10 +254,6 @@ public class MainWindowController implements Initializable {
         this.TPassword.setText(generator.generate());
     }
 
-   
-
-   
-
     /**
      * Establece la safebox y la ruta de esta para que el controlador pueda
      * trabajar con los recursos
@@ -282,6 +293,56 @@ public class MainWindowController implements Initializable {
         this.sf = null;
         this.ruta = null;
         System.exit(0);
+    }
+
+    @FXML
+    private void buscar(KeyEvent event) {
+        if (TBuscar.getText().equals("")) {
+            entradasTabla.removeAll(entradasBoveda);
+            for (Entrada e : entradasBoveda) {
+                this.entradasTabla.add(e);
+            }
+            this.tabla.setItems(entradasTabla);
+        } else {
+
+            switch (ComboOpciones.getValue()) {
+                case "app":
+                    entradasTabla.removeAll(entradasBoveda);
+                    for (Entrada e : entradasBoveda) {
+                        if (e.getApp().contains(TBuscar.getText())) {
+                            this.entradasTabla.add(e);
+                        }
+                    }
+                    this.tabla.setItems(entradasTabla);
+
+                    break;
+                case "usuario":
+                    entradasTabla.removeAll(entradasBoveda);
+                    for (Entrada e : entradasBoveda) {
+                        if (e.getUser().contains(TBuscar.getText())) {
+                            this.entradasTabla.add(e);
+                        }
+                    }
+                    this.tabla.setItems(entradasTabla);
+
+                    break;
+                case "password":
+                    entradasTabla.removeAll(entradasBoveda);
+                    for (Entrada e : entradasBoveda) {
+                        if (e.getPassword().contains(TBuscar.getText())) {
+                            this.entradasTabla.add(e);
+                        }
+                    }
+                    this.tabla.setItems(entradasTabla);
+
+                    break;
+                default:
+                    System.err.println("Error en el switch , en ningun caso se deberia activar esta opcion");
+
+            }
+
+        }
+
     }
 
 }

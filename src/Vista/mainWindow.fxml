@@ -9,41 +9,47 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="883.0" styleClass="mainFxmlClass" stylesheets="@mainwindow.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.MainWindowController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="890.0" styleClass="mainFxmlClass" stylesheets="@mainwindow.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.MainWindowController">
    <children>
-      <Pane layoutX="637.0" layoutY="-12.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="256.0" styleClass="cabecera" stylesheets="@mainwindow.css">
+      <Pane layoutX="637.0" layoutY="-12.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="289.0" styleClass="cabecera" stylesheets="@mainwindow.css">
          <children>
-            <Pane fx:id="PaneEntry" layoutX="28.0" layoutY="25.0" prefHeight="537.0" prefWidth="200.0" styleClass="PaneEntry">
+            <Pane fx:id="PaneEntry" layoutX="28.0" layoutY="176.0" prefHeight="430.0" prefWidth="200.0" styleClass="PaneEntry">
                <children>
-                  <Label fx:id="Lapp" layoutX="28.0" layoutY="9.0" style="-fx-text-fill: white;" text="Apliación" />
-                  <TextField fx:id="TApp" layoutX="26.0" layoutY="40.0" prefHeight="25.0" prefWidth="149.0" styleClass="TxtEntry" />
-                  <TextField fx:id="TUser" layoutX="26.0" layoutY="120.0" prefHeight="25.0" prefWidth="149.0" styleClass="TxtEntry" />
-                  <Label fx:id="LUser" layoutX="28.0" layoutY="89.0" style="-fx-text-fill: white;" text="Usuario" />
-                  <Label fx:id="Lpassword" layoutX="28.0" layoutY="171.0" style="-fx-text-fill: white;" text="Contraseña" />
-                  <TextField fx:id="TPassword" layoutX="26.0" layoutY="201.0" prefHeight="25.0" prefWidth="149.0" styleClass="TxtEntry" />
-                  <Button fx:id="BGuardar" layoutX="18.0" layoutY="433.0" mnemonicParsing="false" onAction="#save" prefHeight="32.0" prefWidth="164.0" styleClass="boton" stylesheets="@mainwindow.css" text="Guardar">
+                  <Label fx:id="Lapp" layoutX="28.0" layoutY="14.0" style="-fx-text-fill: white;" text="Apliación" />
+                  <TextField fx:id="TApp" layoutX="26.0" layoutY="45.0" prefHeight="25.0" prefWidth="149.0" styleClass="TxtEntry" />
+                  <TextField fx:id="TUser" layoutX="26.0" layoutY="125.0" prefHeight="25.0" prefWidth="149.0" styleClass="TxtEntry" />
+                  <Label fx:id="LUser" layoutX="28.0" layoutY="94.0" style="-fx-text-fill: white;" text="Usuario" />
+                  <Label fx:id="Lpassword" layoutX="28.0" layoutY="176.0" style="-fx-text-fill: white;" text="Contraseña" />
+                  <TextField fx:id="TPassword" layoutX="26.0" layoutY="206.0" prefHeight="25.0" prefWidth="149.0" styleClass="TxtEntry" />
+                  <Button fx:id="BGuardar" layoutX="18.0" layoutY="324.0" mnemonicParsing="false" onAction="#save" prefHeight="32.0" prefWidth="164.0" styleClass="boton" stylesheets="@mainwindow.css" text="Guardar">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="BCancelar" layoutX="18.0" layoutY="482.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="164.0" styleClass="boton" stylesheets="@mainwindow.css" text="Cancelar">
+                  <Button fx:id="BCancelar" layoutX="18.0" layoutY="373.0" mnemonicParsing="false" onAction="#cancel" prefHeight="32.0" prefWidth="164.0" styleClass="boton" stylesheets="@mainwindow.css" text="Cancelar">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="BGenerar" layoutX="18.0" layoutY="259.0" mnemonicParsing="false" onAction="#generar" prefHeight="32.0" prefWidth="164.0" styleClass="boton" stylesheets="@mainwindow.css" text="Generar">
+                  <Button fx:id="BGenerar" layoutX="19.0" layoutY="247.0" mnemonicParsing="false" onAction="#generar" prefHeight="32.0" prefWidth="164.0" styleClass="boton" stylesheets="@mainwindow.css" text="Generar">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
                </children>
             </Pane>
+            <Pane layoutX="28.0" layoutY="19.0" prefHeight="144.0" prefWidth="200.0" styleClass="PaneEntry">
+               <children>
+                  <TextField fx:id="TBuscar" layoutX="18.0" layoutY="89.0" onKeyReleased="#buscar" prefHeight="25.0" prefWidth="164.0" promptText="Buscar con nombre exacto" styleClass="TxtEntry" />
+                  <ComboBox fx:id="ComboOpciones" layoutX="18.0" layoutY="47.0" prefHeight="25.0" prefWidth="164.0" styleClass="combobox" />
+                  <Label layoutX="18.0" layoutY="14.0" style="-fx-text-fill: white;" text="Buscar Información" />
+               </children></Pane>
          </children></Pane>
-      <Button fx:id="Banadir" layoutX="15.0" layoutY="503.0" mnemonicParsing="false" onAction="#add" prefHeight="27.0" prefWidth="289.0" styleClass="boton" stylesheets="@mainwindow.css" text="Añadir">
+      <Button fx:id="Banadir" layoutX="15.0" layoutY="549.0" mnemonicParsing="false" onAction="#add" prefHeight="27.0" prefWidth="289.0" styleClass="boton" stylesheets="@mainwindow.css" text="Añadir">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button fx:id="BBorrar" layoutX="333.0" layoutY="503.0" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="289.0" styleClass="boton" text="Borrar">
+      <Button fx:id="BBorrar" layoutX="333.0" layoutY="549.0" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="289.0" styleClass="boton" text="Borrar">
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -66,7 +72,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="tabla" layoutY="25.0" onMouseClicked="#seleccionar" prefHeight="457.0" prefWidth="637.0" styleClass="tabla">
+      <TableView fx:id="tabla" layoutY="25.0" onMouseClicked="#seleccionar" prefHeight="502.0" prefWidth="637.0" styleClass="tabla">
         <columns>
           <TableColumn fx:id="columnAPP" prefWidth="212.0" resizable="false" styleClass="tabla" text="Aplicación" />
           <TableColumn fx:id="columnUser" prefWidth="212.0" resizable="false" styleClass="tabla" text="Usuario" />
