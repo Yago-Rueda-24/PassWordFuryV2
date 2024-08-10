@@ -72,7 +72,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="tabla" layoutY="25.0" onMouseClicked="#seleccionar" prefHeight="502.0" prefWidth="637.0" styleClass="tabla">
+      <TableView fx:id="tabla" layoutY="25.0" onMouseClicked="#modify" prefHeight="502.0" prefWidth="637.0" styleClass="tabla">
         <columns>
           <TableColumn fx:id="columnAPP" prefWidth="212.0" resizable="false" styleClass="tabla" text="Aplicación" />
           <TableColumn fx:id="columnUser" prefWidth="212.0" resizable="false" styleClass="tabla" text="Usuario" />

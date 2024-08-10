@@ -81,8 +81,9 @@ public class SafeBox implements Serializable {
      * @throws EXEntradaRepetida
      */
     public void modify(Entrada entryremoved, Entrada entryadded) throws EXEntradaRepetida {
-        this.add(entryadded);
+
         this.remove(entryremoved);
+        this.add(entryadded);
 
     }
 

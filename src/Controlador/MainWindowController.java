@@ -58,6 +58,8 @@ public class MainWindowController implements Initializable {
     private ArrayList entryElements;
     private Generador generator;
     private SafeBox sf;
+    private boolean booladd;
+    private boolean boolmodify;
     /**
      * Se usa para señalar las opciones que tiene el combobox
      */
@@ -137,6 +139,8 @@ public class MainWindowController implements Initializable {
         ComboOpciones.setItems(opcombobox);
         ComboOpciones.setValue("app");
 
+        booladd = false;
+        boolmodify = false;
         showEntry(false);
 
     }
@@ -145,10 +149,11 @@ public class MainWindowController implements Initializable {
     private void delete(ActionEvent event) {
         Entrada delete = (Entrada) tabla.getSelectionModel().getSelectedItem();
         if (delete != null) {
-            this.entradasBoveda.remove(delete);
+            this.sf.remove(delete);
             this.entradasTabla.remove(delete);
             storeData();
             this.tabla.setItems(entradasTabla);
+            showEntry(false);
         } else {
             showAlert("Error", "El campo seleccionado esta vacio");
         }
@@ -157,13 +162,13 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void add(ActionEvent event) {
-
+        booladd = true;
+        boolmodify = false;
+        this.TApp.setText("");
+        this.TUser.setText("");
+        this.TPassword.setText("");
         showEntry(true);
 
-    }
-
-    @FXML
-    private void seleccionar(MouseEvent event) {
     }
 
     /**
@@ -219,25 +224,35 @@ public class MainWindowController implements Initializable {
             if (TApp.getText().equals("") || TUser.getText().equals("") || TPassword.getText().equals("")) {
                 throw new ExEntradaInvalida("La entrada que quieres añadir no tiene todos los campos completos");
             }
-            if (!entradasTabla.isEmpty()) {
-                for (Object e : entradasTabla) {
-                    Entrada aux = (Entrada) e;
-                    if (aux.getApp().equals(this.TApp.getText())) {
-                        throw new EXEntradaRepetida("La entrada que quieres añadir ya se encuentra en la boveda");
-                    }
+
+            if (this.booladd) {
+                Entrada aux = new Entrada(TApp.getText(), TUser.getText(), TPassword.getText());
+                this.sf.add(aux);//El add de la safebox ya comprueba repetidos
+                this.entradasTabla.add(aux);
+                storeData();
+                this.tabla.setItems(entradasTabla);
+            }
+            if (this.boolmodify) {
+                Entrada neweentry = new Entrada(TApp.getText(), TUser.getText(), TPassword.getText());
+                Entrada oldentry = (Entrada) tabla.getSelectionModel().getSelectedItem();
+                if (oldentry != null) {
+                    this.sf.modify(oldentry, neweentry);
+                    this.entradasTabla.remove(oldentry);
+                    this.entradasTabla.add(neweentry);
+                    storeData();
+                    this.tabla.setItems(entradasTabla);
                 }
             }
-            Entrada aux = new Entrada(TApp.getText(), TUser.getText(), TPassword.getText());
-            this.entradasBoveda.add(aux);
-            this.entradasTabla.add(aux);
-            storeData();
-            this.tabla.setItems(entradasTabla);
 
         } catch (ExEntradaInvalida | EXEntradaRepetida ex) {
             showAlert("Error", ex.getLocalizedMessage());
 
+        } finally {
+            showEntry(false);
+            booladd = false;
+            boolmodify = false;
         }
-        showEntry(false);
+
     }
 
     @FXML
@@ -389,6 +404,17 @@ public class MainWindowController implements Initializable {
         }
     }
 
-    
-    //asdasd
+    @FXML
+    private void modify(MouseEvent event) {
+        Entrada delete = (Entrada) tabla.getSelectionModel().getSelectedItem();
+        if (delete != null) {
+            this.booladd = false;
+            this.boolmodify = true;
+            TApp.setText(delete.getApp());
+            TUser.setText(delete.getUser());
+            TPassword.setText(delete.getPassword());
+            showEntry(true);
+        }
+    }
+
 }
