@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
  * @author yago
  */
 public class WelcomeWindowController implements Initializable {
+ 
 
     private FXMLLoader loader;
     @FXML
@@ -33,13 +35,15 @@ public class WelcomeWindowController implements Initializable {
     private Button BCrear;
     @FXML
     private AnchorPane panelPrincipal;
+    @FXML
+    private Label LReloj;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
     }
 
     @FXML
@@ -71,7 +75,5 @@ public class WelcomeWindowController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(WelcomeWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
 }
