@@ -35,8 +35,7 @@ public class WelcomeWindowController implements Initializable {
     private Button BCrear;
     @FXML
     private AnchorPane panelPrincipal;
-    @FXML
-    private Label LReloj;
+ 
 
     /**
      * Initializes the controller class.

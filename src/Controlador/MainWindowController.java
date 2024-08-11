@@ -14,8 +14,10 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -310,97 +312,27 @@ public class MainWindowController implements Initializable {
     private void buscar() {
         if (TBuscar.getText().equals("")) {
             entradasTabla.removeAll(entradasBoveda);
-            for (Entrada e : entradasBoveda) {
-                this.entradasTabla.add(e);
-            }
+            List<Entrada> entrycollection = entradasBoveda.stream().collect(Collectors.toList());
+            entradasTabla.addAll(entrycollection);
             this.tabla.setItems(entradasTabla);
         } else {
-
-            switch (ComboOpciones.getValue()) {
-                case "app":
-                    entradasTabla.removeAll(entradasBoveda);
-                    for (Entrada e : entradasBoveda) {
-                        if (e.getApp().contains(TBuscar.getText())) {
-                            this.entradasTabla.add(e);
-                        }
-                    }
-                    this.tabla.setItems(entradasTabla);
-
-                    break;
-                case "usuario":
-                    entradasTabla.removeAll(entradasBoveda);
-                    for (Entrada e : entradasBoveda) {
-                        if (e.getUser().contains(TBuscar.getText())) {
-                            this.entradasTabla.add(e);
-                        }
-                    }
-                    this.tabla.setItems(entradasTabla);
-
-                    break;
-                case "password":
-                    entradasTabla.removeAll(entradasBoveda);
-                    for (Entrada e : entradasBoveda) {
-                        if (e.getPassword().contains(TBuscar.getText())) {
-                            this.entradasTabla.add(e);
-                        }
-                    }
-                    this.tabla.setItems(entradasTabla);
-
-                    break;
-                default:
-                    System.err.println("Error en el switch , en ningun caso se deberia activar esta opcion");
-
-            }
-
-        }
-    }
-
-    @FXML
-    private void buscarTexto(ActionEvent event) {
-        if (TBuscar.getText().equals("")) {
             entradasTabla.removeAll(entradasBoveda);
-            for (Entrada e : entradasBoveda) {
-                this.entradasTabla.add(e);
-            }
-            this.tabla.setItems(entradasTabla);
-        } else {
-
+            List<Entrada> entrycollection;
             switch (ComboOpciones.getValue()) {
                 case "app":
-                    entradasTabla.removeAll(entradasBoveda);
-                    for (Entrada e : entradasBoveda) {
-                        if (e.getApp().contains(TBuscar.getText())) {
-                            this.entradasTabla.add(e);
-                        }
-                    }
-                    this.tabla.setItems(entradasTabla);
-
+                    entrycollection = entradasBoveda.stream().filter(entrada -> entrada.getApp().contains(TBuscar.getText())).collect(Collectors.toList());
                     break;
                 case "usuario":
-                    entradasTabla.removeAll(entradasBoveda);
-                    for (Entrada e : entradasBoveda) {
-                        if (e.getUser().contains(TBuscar.getText())) {
-                            this.entradasTabla.add(e);
-                        }
-                    }
-                    this.tabla.setItems(entradasTabla);
-
+                    entrycollection = entradasBoveda.stream().filter(entrada -> entrada.getUser().contains(TBuscar.getText())).collect(Collectors.toList());
                     break;
                 case "password":
-                    entradasTabla.removeAll(entradasBoveda);
-                    for (Entrada e : entradasBoveda) {
-                        if (e.getPassword().contains(TBuscar.getText())) {
-                            this.entradasTabla.add(e);
-                        }
-                    }
-                    this.tabla.setItems(entradasTabla);
-
+                    entrycollection = entradasBoveda.stream().filter(entrada -> entrada.getPassword().contains(TBuscar.getText())).collect(Collectors.toList());
                     break;
                 default:
-                    System.err.println("Error en el switch , en ningun caso se deberia activar esta opcion");
-
+                    throw new AssertionError();
             }
-
+            entradasTabla.addAll(entrycollection);
+            this.tabla.setItems(entradasTabla);
         }
     }
 
