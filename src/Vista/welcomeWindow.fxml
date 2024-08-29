@@ -13,7 +13,10 @@
         <URL value="@/Vista/estilos/welcomewindow.css" />
     </stylesheets>
    <children>
-      <Pane layoutX="-25.0" layoutY="-17.0" prefHeight="422.0" prefWidth="182.0" snapToPixel="false" styleClass="deco" stylesheets="@estilos/welcomewindow.css" />
+      <Pane layoutX="-25.0" layoutY="-17.0" prefHeight="422.0" prefWidth="182.0" snapToPixel="false" styleClass="deco" stylesheets="@estilos/welcomewindow.css">
+         <children>
+            <Label fx:id="LHora" layoutX="55.0" layoutY="43.0" prefHeight="17.0" prefWidth="109.0" styleClass="reloj" stylesheets="@estilos/welcomewindow.css" text="label" textAlignment="CENTER" />
+         </children></Pane>
       <Label id="titulo" layoutX="175.0" layoutY="30.0" styleClass="etiqueta" stylesheets="@estilos/welcomewindow.css" text="PassWordFury" />
       <Label layoutX="175.0" layoutY="73.0" styleClass="etiqueta" stylesheets="@estilos/welcomewindow.css" text="Gestionar tus contraseñas de forma es radical , tronco" />
       <Label layoutX="175.0" layoutY="153.0" styleClass="etiqueta" stylesheets="@estilos/welcomewindow.css" text="Crear SafeBox" />

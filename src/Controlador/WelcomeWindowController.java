@@ -6,9 +6,13 @@ package Controlador;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.SimpleTimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,8 +30,9 @@ import javafx.stage.Stage;
  * @author yago
  */
 public class WelcomeWindowController implements Initializable {
- 
 
+    private SimpleDateFormat formatter;
+    
     private FXMLLoader loader;
     @FXML
     private Button BAbrir;
@@ -35,7 +40,8 @@ public class WelcomeWindowController implements Initializable {
     private Button BCrear;
     @FXML
     private AnchorPane panelPrincipal;
- 
+    @FXML
+    private Label LHora;
 
     /**
      * Initializes the controller class.
@@ -43,6 +49,9 @@ public class WelcomeWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        formatter = new SimpleDateFormat("HH:mm:ss");
+        LHora.setText(formatter.format(new Date(System.currentTimeMillis())));
+        cambiarHora();
     }
 
     @FXML
@@ -75,4 +84,23 @@ public class WelcomeWindowController implements Initializable {
             Logger.getLogger(WelcomeWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void cambiarHora() {
+
+        new Thread(() -> {
+
+            try {
+                while (true) {
+                    Thread.sleep(1000);
+                    Platform.runLater(() -> LHora.setText(formatter.format(new Date(System.currentTimeMillis()))));
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Platform.runLater(() -> LHora.setText("Texto actualizado desde un hilo externo"));
+        }).start();
+    }
+
 }
