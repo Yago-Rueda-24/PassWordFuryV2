@@ -36,7 +36,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -140,10 +139,12 @@ public class MainWindowController implements Initializable {
         opcombobox = FXCollections.observableArrayList("app", "usuario", "password");
         ComboOpciones.setItems(opcombobox);
         ComboOpciones.setValue("app");
-
         booladd = false;
         boolmodify = false;
         showEntry(false);
+        
+       
+        
 
     }
 

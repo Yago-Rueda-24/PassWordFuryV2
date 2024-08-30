@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 import Modelo.SafeBox;
 import Modelo.excepciones.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -151,6 +150,9 @@ public class CreateWindowController implements Initializable {
             stage.setTitle("Boveda");
             stage.setResizable(false);
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event -> {
+                System.exit(0);
+            });
             stage.show();
 
             Stage stageclose = (Stage) TPassword.getScene().getWindow();
@@ -160,8 +162,6 @@ public class CreateWindowController implements Initializable {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-   
 
     @FXML
     private void closeWindow(ActionEvent event) {

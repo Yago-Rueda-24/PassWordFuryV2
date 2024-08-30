@@ -75,6 +75,9 @@ public class WelcomeWindowController implements Initializable {
             stage.setTitle(titulo);
             stage.setResizable(false);
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(event->{
+            System.exit(0);
+            });
             stage.show();
 
             Stage stageclose = (Stage) panelPrincipal.getScene().getWindow();

@@ -58,6 +58,7 @@ public class Generador {
         int aux = 97 + random.nextInt(26);
         char c = (char) aux;
         return c;
+        
     }
 
     /**

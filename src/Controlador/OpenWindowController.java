@@ -36,7 +36,7 @@ import javafx.stage.Stage;
  * @author yago
  */
 public class OpenWindowController implements Initializable {
-
+    
     private String ruta;
     private SafeBox sf;
     private StringProperty strproperty;
@@ -67,7 +67,7 @@ public class OpenWindowController implements Initializable {
         Tpassword.textProperty().bindBidirectional(strproperty);
         TOcultPassword.textProperty().bindBidirectional(strproperty);
     }
-
+    
     @FXML
     private void selectUbi(ActionEvent event) {
         FileChooser filec = new FileChooser();
@@ -79,7 +79,7 @@ public class OpenWindowController implements Initializable {
                 if (!rutaux.substring(rutaux.length() - 4).equals(".bov")) {
                     Tubi.setText("");
                     throw new IOException("El archivo seleccionado no tiene la extensión .bov");
-
+                    
                 }
                 in = new ObjectInputStream(new FileInputStream(rutaux));
                 this.sf = (SafeBox) in.readObject();
@@ -92,12 +92,12 @@ public class OpenWindowController implements Initializable {
         } catch (IOException | ClassNotFoundException ex) {
             showAlert("Error de formato", ex.getMessage());
         }
-
+        
     }
-
+    
     @FXML
     private void OpenSafe(ActionEvent event) {
-
+        
         try {
             if (Tubi.getText().equals("") || Tpassword.getText().equals("")) {
                 Tubi.setText("");
@@ -108,7 +108,7 @@ public class OpenWindowController implements Initializable {
                 Tpassword.setText("");
                 throw new ExAperturaSafeBox("La contraseña que ha introducido es incorrecta , no se puede abrir la boveda ");
             }
-
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/mainWindow.fxml"));
             Parent root = loader.load();
 
@@ -121,11 +121,15 @@ public class OpenWindowController implements Initializable {
             stage.setTitle("Boveda");
             stage.setResizable(false);
             stage.setScene(new Scene(root));
+            stage.setOnCloseRequest(evento -> {
+                System.exit(0);
+            });
+            
             stage.show();
-
+            
             Stage stageclose = (Stage) Tpassword.getScene().getWindow();
             stageclose.hide();
-
+            
         } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (EXCampoIncompleto ex) {
@@ -134,12 +138,12 @@ public class OpenWindowController implements Initializable {
             showAlert("Contraseña Erronea", ex.getMessage());
         }
     }
-
+    
     @FXML
     private void closeWindow(ActionEvent event) {
-
+        
         try {
-
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/welcomeWindow.fxml"));
             Parent root = loader.load();
 
@@ -152,20 +156,20 @@ public class OpenWindowController implements Initializable {
             stage.setResizable(false);
             stage.setScene(new Scene(root));
             stage.show();
-
+            
             Stage stageclose = (Stage) this.BAbrir.getScene().getWindow();
             stageclose.close();
-
+            
         } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
-
+    
     private void showAlert(String title, String description) {
-
+        
         try {
-
+            
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vista/dialogWindow.fxml"));
             Parent root = loader.load();
 
@@ -180,26 +184,26 @@ public class OpenWindowController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.showAndWait();
-
+            
         } catch (IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
-
+    
     @FXML
     private void mostrarPassWord(ActionEvent event) {
         if (this.BMostrar.getText().equals("Ocultar")) {
             this.BMostrar.setText("Mostrar");
             this.Tpassword.setVisible(false);
             this.TOcultPassword.setVisible(true);
-
+            
         } else {
             this.BMostrar.setText("Ocultar");
             this.Tpassword.setVisible(true);
             this.TOcultPassword.setVisible(false);
         }
-
+        
     }
-
+    
 }

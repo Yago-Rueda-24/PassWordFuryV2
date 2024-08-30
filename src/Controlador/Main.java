@@ -30,11 +30,15 @@ public class Main extends Application {
 
             // Cargo el scene
             Scene scene = new Scene(ventana);
-            
+
             // Seteo la scene y la muestro
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
             primaryStage.show();
+            primaryStage.setOnCloseRequest(event -> {
+                System.exit(0);
+            });
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
