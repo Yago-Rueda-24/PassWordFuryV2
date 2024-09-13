@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +25,7 @@ public class Main extends Application {
             //Cargo la vista
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/Vista/welcomeWindow.fxml"));
-
+         
             // Cargo la ventana
             Pane ventana = (Pane) loader.load();
 
