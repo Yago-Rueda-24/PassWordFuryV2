@@ -99,11 +99,5 @@ public class SafeBox implements Serializable {
 
     }
 
-    public void prueba() {
-
-        Iterator<Entrada> itr = getIterator();
-        while (itr.hasNext()) {
-            System.out.println(itr.next().toString());
-        }
-    }
+    
 }
